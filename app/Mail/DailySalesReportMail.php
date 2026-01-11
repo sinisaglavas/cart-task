@@ -2,14 +2,16 @@
 
 namespace App\Mail;
 
-use App\Models\Product;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
-class LowStockMail extends Mailable
+
+class DailySalesReportMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -17,7 +19,8 @@ class LowStockMail extends Mailable
      * Create a new message instance.
      */
     public function __construct(
-        public Product $product
+        public Collection $report,
+        public Carbon $date
     ) {}
 
     /**
@@ -26,7 +29,7 @@ class LowStockMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Low Stock alert',
+            subject: 'Daily Sales Report - ' . $this->date->toDateString()
         );
     }
 
@@ -36,7 +39,7 @@ class LowStockMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.low-stock',
+            view: 'emails.daily-sales-report',
         );
     }
 
