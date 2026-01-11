@@ -17,7 +17,7 @@
                 @auth
                     <button
                         wire:click="addToCart({{ $product->id }})"
-                        class="mt-4 px-4 py-2 bg-blue-600 text-white rounded
+                        class="mt-4 px-4 py-2 bg-blue-600 text-black rounded
                                hover:bg-blue-700 disabled:opacity-50"
                         @if ($product->stock_quantity === 0) disabled @endif>
                         Add to cart

@@ -43,14 +43,19 @@
         </div>
 
         <div class="mt-6 flex justify-between items-center">
-            <p class="text-xl font-bold">
-                Total: ${{ number_format($this->total, 2) }}
-            </p>
+            <p class="text-xl font-bold">Total: ${{ number_format($this->total, 2) }}</p>
 
+            @if (session()->has('success'))
+                <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">
+                    {{ session('success') }}
+                </div>
+            @endif
             <button
-                class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                wire:click="checkout"
+                class="px-6 py-2 bg-green-600 text-black rounded hover:bg-green-700">
                 Checkout
             </button>
+
         </div>
     @endif
 </div>
